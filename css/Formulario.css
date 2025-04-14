@@ -169,3 +169,24 @@ border-radius: 5px; /* Bordes redondeados para un toque moderno */
 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
 }
 
+@media (max-width: 768px) {
+    .header__logo-container {
+        flex-direction: column; /* Apila el logo y el texto */
+        align-items: center;
+        gap: 5px; /* Espacio reducido entre elementos */
+    }
+
+    .header__logo {
+        width: 50px; /* Tamaño reducido del logo */
+        height: auto; /* Mantén proporciones */
+    }
+
+    .header__logo-text {
+        display: none !important; /* Fuerza la ocultación del texto dentro del logo */
+    }
+
+    .header__name {
+        font-size: 0.9rem; /* Ajusta el tamaño del texto adicional */
+        text-align: center; /* Centra el texto adicional */
+    }
+}
