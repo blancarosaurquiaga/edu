@@ -56,12 +56,19 @@ En 1959, la U.E.E. Dra. Blanca Rosa Urquiaga fue oficialmente fundada el 22 de n
                 <p></p></div>
             </div>
         </div>
-        <div class="buttons">
-            <button class="button" onclick="moveCarousel(-1)">⮜</button>
-            <button class="button" onclick="moveCarousel(1)">⮞</button>
+       <!-- Botón para abrir la galería -->
+    <button class="gallery-btn" onclick="openGallery()">Galería</button>
+
+    <!-- Modal para la galería -->
+    <div class="modal" id="photoModal">
+        <button class="modal-close" onclick="closeGallery()">Cerrar</button>
+        <button class="modal-nav prev" onclick="navigateGallery(-1)">⮜</button>
+        <button class="modal-nav next" onclick="navigateGallery(1)">⮞</button>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="Imagen actual">
+            <p id="modalCaption" class="modal-caption"></p>
         </div>
     </div>
-
     <div class="map-section">
         <h2>¿Dónde nos encontramos?</h2>
         <p>Encuentra nuestra ubicación en el siguiente mapa:</p>
@@ -72,6 +79,7 @@ En 1959, la U.E.E. Dra. Blanca Rosa Urquiaga fue oficialmente fundada el 22 de n
         </iframe>
     </div>
 
+    
     <footer>
         © 2025 |Contacto <a href="#">0412-5789748</a> |
         <section class="footer__copy container">
@@ -98,6 +106,44 @@ En 1959, la U.E.E. Dra. Blanca Rosa Urquiaga fue oficialmente fundada el 22 de n
         function toggleExpand() {
             const content = document.getElementById('hidden-content');
             content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        }
+  // Array con las imágenes y sus comentarios
+  const galleryData = [
+            { src: "images/1.jpeg", caption: "Niños participando en actividades recreativas que fomentan la convivencia y el aprendizaje colaborativo dentro del patio de la escuela" },
+            { src: "images/2.jpeg", caption: "Jornada de vacunación en la institución, promoviendo la salud y el bienestar de nuestros estudiantes en un ambiente seguro y responsable" },
+            { src: "images/3.jpeg", caption: "Un momento destacado en la historia de nuestra comunidad." },
+            { src: "images/4.jpeg", caption: "Ceremonia institucional en la que se resaltan los valores comunitarios, con la activa participación de estudiantes y docentes" },
+            { src: "images/5.jpeg", caption: "compartiendo conocimientos esenciales con los niños, enseñando prácticas de seguridad y prevención para enfrentar situaciones de emergencia con confianza" },
+            { src: "images/7.jpeg", caption: "" },
+            { src: "images/6.jpeg", caption: "Espacio educativo diseñado para incentivar la creatividad y el desarrollo integral de nuestros alumnos" },
+        ];
+
+        let currentImageIndex = 0;
+
+        // Abre la modal y muestra la primera imagen con su comentario
+        function openGallery() {
+            currentImageIndex = 0;
+            updateModalContent();
+            document.getElementById('photoModal').style.display = 'block';
+        }
+
+        // Cierra la modal
+        function closeGallery() {
+            document.getElementById('photoModal').style.display = 'none';
+        }
+
+        // Navega entre las imágenes (anterior o siguiente)
+        function navigateGallery(direction) {
+            currentImageIndex = (currentImageIndex + direction + galleryData.length) % galleryData.length;
+            updateModalContent();
+        }
+
+        // Actualiza la imagen y el comentario en la modal
+        function updateModalContent() {
+            const modalImage = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            modalImage.src = galleryData[currentImageIndex].src;
+            modalCaption.textContent = galleryData[currentImageIndex].caption;
         }
     </script>
 </body>
